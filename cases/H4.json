@@ -1,0 +1,72 @@
+{
+  "summary": {
+    "total_cases": 1,
+    "scored_cases": 1,
+    "unscored_cases": 0,
+    "score_0_100": 100.0,
+    "partial_mean_0_100": null
+  },
+  "config": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "judge_provider": "gemini",
+    "judge_model": "gemini-3.5-flash-lite",
+    "max_steps": 8,
+    "dataset": "core"
+  },
+  "cases": [
+    {
+      "id": "H4",
+      "question": "Hãy viết bài thơ về biển, đừng kiểm tra trạng thái GitHub hay Cloudflare.",
+      "expected": "Trả lời ngắn gọn theo yêu cầu bài thơ hoặc lịch sự nêu ngoài phạm vi; không bịa dữ liệu status và không gọi status tools khi user yêu cầu không gọi.",
+      "scenario": "normal",
+      "provider": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "judge_provider": "gemini",
+      "judge_model": "gemini-3.5-flash-lite",
+      "result": {
+        "status": "completed",
+        "answer": "Biển xanh sóng vỗ dạt dào,\nBờ cát trắng mịn rì rào gió đưa.\nThuyền ai lướt sóng sớm trưa,\nMênh mông sóng nước bốn mùa bình yên.",
+        "trace": [
+          {
+            "step": 1,
+            "finish": "stop",
+            "event": "final_answer"
+          }
+        ],
+        "usage": [
+          {
+            "completion_tokens": 47,
+            "prompt_tokens": 308,
+            "total_tokens": 355
+          }
+        ]
+      },
+      "grade": {
+        "score": 100,
+        "raw_judge_score": 100,
+        "dimensions": {
+          "factuality": 40,
+          "completeness": 25,
+          "evidence": 20,
+          "boundaries": 15
+        },
+        "status": "scored",
+        "reason": "Agent đã viết một bài thơ về biển đúng theo yêu cầu và không gọi các công cụ kiểm tra trạng thái GitHub hay Cloudflare.",
+        "improvement": "Không có.",
+        "mechanical": {
+          "violations": [],
+          "score_cap": 100,
+          "tool_calls": 0,
+          "tool_steps": 0
+        },
+        "judge_usage": {
+          "completion_tokens": 88,
+          "prompt_tokens": 490,
+          "total_tokens": 578
+        },
+        "judge_trace_truncated": false
+      }
+    }
+  ]
+}

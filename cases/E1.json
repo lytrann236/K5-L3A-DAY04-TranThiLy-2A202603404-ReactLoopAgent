@@ -1,0 +1,136 @@
+{
+  "summary": {
+    "total_cases": 1,
+    "scored_cases": 1,
+    "unscored_cases": 0,
+    "score_0_100": 100.0,
+    "partial_mean_0_100": null
+  },
+  "config": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "judge_provider": "gemini",
+    "judge_model": "gemini-3.5-flash-lite",
+    "max_steps": 8,
+    "dataset": "core"
+  },
+  "cases": [
+    {
+      "id": "E1",
+      "question": "GitHub Actions hiện có sự cố không? Hãy xem cả incident gần đây và dẫn nguồn.",
+      "expected": "Tại thời điểm snapshot GitHub overall none; incident Actions 05/11 resolved. Không nói sự cố cũ đang diễn ra.",
+      "scenario": "normal",
+      "provider": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "judge_provider": "gemini",
+      "judge_model": "gemini-3.5-flash-lite",
+      "result": {
+        "status": "completed",
+        "answer": "Theo dữ liệu trạng thái hệ thống GitHub được ghi nhận vào lúc **2026-11-09 03:50:47 UTC** từ nguồn [GitHub Status](https://www.githubstatus.com):\n\n* **Trạng thái hiện tại:** Component **Actions** đang ở trạng thái hoạt động bình thường (`operational`), với chỉ số tổng thể của hệ thống là `none` (All Systems Operational).\n* **Các incident gần đây liên quan đến Actions:** Trong số các incident gần đây được ghi nhận và đã được giải quyết (`resolved`), có một số sự cố liên quan đến Actions gần thời điểm hiện tại:\n  1. **`h02n9572mx9y`** - \"Incident with Actions\" (Đã giải quyết vào ngày `2026-11-07T01:10:18.506Z`).\n  2. **`xr3myzj7ms51`** - \"Incident with Actions and Pages\" (Đã giải quyết vào ngày `2026-11-07T01:04:38.647Z`).\n  3. **`pfbmpxxfq1cy`** - \"Degraded performance for multiple GitHub services\" (Đã giải quyết vào ngày `2026-11-06T00:20:49.369Z`).\n  4. **`t89g2q1800fr`** - \"Incident with Actions\" (Đã giải quyết vào ngày `2026-11-05T17:42:35.455Z`).\n\n**Giới hạn bằng chứng:** Dữ liệu trên chỉ phản ánh trạng thái tại thời điểm snapshot (`2026-11-09T03:50:47Z`) và giới hạn trong phạm vi các incident gần đây được hệ thống chính thức ghi nhận. Các sự cố cục bộ chưa được công nhận hoặc xảy ra sau thời điểm này không được bao gồm trong thông tin trên.",
+        "trace": [
+          {
+            "step": 1,
+            "finish": "tool_calls",
+            "event": "tool",
+            "name": "get_status",
+            "arguments": {
+              "component": "Actions",
+              "provider": "github"
+            },
+            "result": {
+              "provider": "github",
+              "captured_at": "2026-11-09T03:50:47.065020+00:00",
+              "overall": {
+                "indicator": "none",
+                "description": "All Systems Operational"
+              },
+              "components": [
+                {
+                  "name": "Actions",
+                  "status": "operational"
+                }
+              ],
+              "incidents": [
+                {
+                  "id": "pfbmpxxfq1cy",
+                  "name": "Degraded performance for multiple GitHub services",
+                  "status": "resolved",
+                  "updated_at": "2026-11-06T00:20:49.369Z"
+                },
+                {
+                  "id": "t89g2q1800fr",
+                  "name": "Incident with Actions",
+                  "status": "resolved",
+                  "updated_at": "2026-11-05T17:42:35.455Z"
+                },
+                {
+                  "id": "h02n9572mx9y",
+                  "name": "Incident with Actions",
+                  "status": "resolved",
+                  "updated_at": "2026-11-07T01:10:18.506Z"
+                },
+                {
+                  "id": "xr3myzj7ms51",
+                  "name": "Incident with Actions and Pages",
+                  "status": "resolved",
+                  "updated_at": "2026-11-07T01:04:38.647Z"
+                },
+                {
+                  "id": "smtdswd1h2w4",
+                  "name": "Incident with Pull Requests, Git Operations and Issues",
+                  "status": "resolved",
+                  "updated_at": "2026-11-04T11:50:06.459Z"
+                }
+              ],
+              "matching_incidents_in_last_50": 23,
+              "note": "Chỉ tìm theo chuỗi trong 50 incident gần nhất; không tìm thấy không chứng minh không có sự cố.",
+              "source": "https://www.githubstatus.com"
+            }
+          },
+          {
+            "step": 2,
+            "finish": "stop",
+            "event": "final_answer"
+          }
+        ],
+        "usage": [
+          {
+            "completion_tokens": 22,
+            "prompt_tokens": 309,
+            "total_tokens": 331
+          },
+          {
+            "completion_tokens": 452,
+            "prompt_tokens": 794,
+            "total_tokens": 1246
+          }
+        ]
+      },
+      "grade": {
+        "score": 100,
+        "raw_judge_score": 100,
+        "dimensions": {
+          "factuality": 40,
+          "completeness": 25,
+          "evidence": 20,
+          "boundaries": 15
+        },
+        "status": "scored",
+        "reason": "Trả lời đầy đủ, chính xác theo snapshot, nêu rõ trạng thái overall là none, các incident gần đây (bao gồm ngày 05/11 và các ngày khác) đều đã được giải quyết, có dẫn nguồn và giới hạn bằng chứng hợp lý.",
+        "improvement": "Không có điểm cần cải thiện.",
+        "mechanical": {
+          "violations": [],
+          "score_cap": 100,
+          "tool_calls": 1,
+          "tool_steps": 1
+        },
+        "judge_usage": {
+          "completion_tokens": 119,
+          "prompt_tokens": 1411,
+          "total_tokens": 1530
+        },
+        "judge_trace_truncated": false
+      }
+    }
+  ]
+}
